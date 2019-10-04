@@ -78,7 +78,7 @@ void HashTableInsert(vector<int>& HashTable , int key)
   }
   else
   {
-    HashTable[hashTableIndex] =+ 1;  
+    HashTable[hashTableIndex]++;  
   }   
 }
 
@@ -93,6 +93,80 @@ void DisplayHashTable(vector<int>& HashTable)
   }
   cout << endl;
 }
+
+// Calculate the mean of Hash table values in table slots
+
+#define INVALID_MEAN -1
+#define INVALID_VARIANCE INVALID_MEAN
+
+double getMean(vector<int> HashTable)
+{
+  if(HashTable.size()>0)
+  {
+    int sum = 0;
+    for(int i=0;i<HashTable.size();i++)
+    {
+      sum = sum + HashTable[i];
+    }
+    return ( sum / HashTable.size());
+  }
+  else
+  {
+    cout << " Hash Tables size is zero ! " << endl ; 
+    return INVALID_MEAN;
+  }   
+}
+
+// Calculate the variance of elements in Hashtable slots
+
+double getVariance(vector<int> HashTable)
+{
+  double mean = getMean(HashTable) , sumElements = 0;
+  if(HashTable.size()>0)
+  {
+    for(int i=0;i<HashTable.size();i++)
+    {
+      sumElements = sumElements +((HashTable[i] - mean)*(HashTable[i] - mean));
+    } 
+    return (sumElements / HashTable.size());
+  }
+  else
+  {
+    cout << " Hash Tables size is zero ! " << endl ; 
+    return INVALID_VARIANCE;
+  }  
+}
+
+// Calculate the minimum value in Hash table
+
+int getMinimum(vector<int> HashTable)
+{
+  int minimum = HashTable[0];
+  for(int i=1;i<HashTable.size();i++)
+  {
+    if(HashTable[i] < minimum)
+    {
+      minimum = HashTable[i];
+    } 
+  }
+  return minimum ; 
+}
+
+// Calculate the maximum value in Hash table
+
+int getMaximum(vector<int> HashTable)
+{
+  int maximum = HashTable[0];
+  for(int i=1;i<HashTable.size();i++)
+  {
+    if(HashTable[i] > maximum)
+    {
+      maximum = HashTable[i];
+    } 
+  }
+  return maximum ; 
+}
+
 
 #define NUM_RANDOM_BIRTHDATES 1000
 #define NUM_HASH_TABLES 4
@@ -126,7 +200,14 @@ int main()
   for(int j=0;j<NUM_HASH_TABLES;j++)
   {
     DisplayHashTable(HashTable[j]);
-  }   
+    cout << " Mean of Hash Table is     : " << getMean(HashTable[j]) << endl ; 
+    cout << " Minimum of Hash Table is  : " << getMinimum(HashTable[j]) << endl ; 
+    cout << " Maximum of Hash Table is  : " << getMaximum(HashTable[j]) << endl ; 
+    cout << " Variance of Hash Table is : " << getVariance(HashTable[j]) << endl ; 
+    
+  } 
+  
+  
 
   return 0;
 }
