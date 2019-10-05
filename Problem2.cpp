@@ -169,9 +169,9 @@ int getMaximum(vector<int> HashTable)
 
 
 #define NUM_RANDOM_BIRTHDATES 1000
-#define NUM_HASH_TABLES 4
+#define NUM_HASH_TABLES 9
 
-int HashTableSizes[NUM_HASH_TABLES] = {64,66,67,61};
+int HashTableSizes[NUM_HASH_TABLES] = {64,66,67,61,59,54,53,48,43};
 
 int main()
 {
@@ -199,15 +199,16 @@ int main()
 
   for(int j=0;j<NUM_HASH_TABLES;j++)
   {
+    // Comment DisplayHashTable call or below line , to strip off
+    // high amount of verbose which would contain entire hash table
     DisplayHashTable(HashTable[j]);
+    cout << " Size of Hash Table is     : " << HashTable[j].size() << endl ; 
     cout << " Mean of Hash Table is     : " << getMean(HashTable[j]) << endl ; 
     cout << " Minimum of Hash Table is  : " << getMinimum(HashTable[j]) << endl ; 
     cout << " Maximum of Hash Table is  : " << getMaximum(HashTable[j]) << endl ; 
     cout << " Variance of Hash Table is : " << getVariance(HashTable[j]) << endl ; 
-    
+    cout << endl;
   } 
   
-  
-
   return 0;
 }
